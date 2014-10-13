@@ -7,19 +7,12 @@ import smallsmilhandler
 import sys
 
 
-def imprmirtags(sHandler):
-    str_total = ""
-    for dicc in self.lista_dic:
-        etiqueta = dicc['name']
-        attr = ""
-        for key in dicc:
-            if key != 'name' and dicc[key]:
-                attr = attr + '\t' + key + "=" + '"' + dicc[key] + '"'
-                str_total = str_total + etiqueta + attr + '\n'
-    print str_total
-
 try:
-
+    parser = make_parser()
+    SHandler = smallsmilhandler.SmallSMILHandler()
+    parser.setContentHandler(sHandler)
+    parser.parse(open(sys.arg[1]))
+    imprimirtags(sHandler)
 except IndexError:
     print "Usage: python karaoke.py file.smil."
     raise SystemExit
