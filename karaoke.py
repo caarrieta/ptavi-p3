@@ -4,25 +4,28 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 import small
 import sys
+import os
 
 if __name__ == "__main__":
-	
     parser = make_parser()
     small = small.SmallSMILHandler()
     parser.setContentHandler(small)
 
     try:
-        fich = open(sys.argv[1],'r')
+        fich = open(sys.argv[1], 'r')
     except IOError:
         print "Usage: python karaoke.py file.smil"
         raise SystemExit
-	
+
     parser.parse(fich)
     lista = small.get_tags()
 
     for diccionario in lista:
-        print diccionario["name"],
+        print diccionario["name"]
         for tags in diccionario:
-            if diccionario[tags] and tags != "name":
-                print "\t", tags , "=" , diccionario[tags] + "",
-		print
+            if diccionario[tags].find("http://") == 0:
+                recurso = diccionario[tags]
+                os.system("wget -q " + recurso)
+                new = diccionario[tags].split('/')[-1]
+                diccionario[tags] = new
+            print "\t", tags, "=", diccionario[tags] + "",
