@@ -8,20 +8,21 @@ import os
 
 class KaraokeLocal():
 
+
     def __init__(self, fich):
         parser = make_parser()
         sHandler = small.SmallSMILHandler()
         parser.setContentHandler(sHandler)
         parser.parse(fich)
         self.lista = sHandler.get_tags()
-  
+
     def __str__(self):
 
         for diccionario in self.lista:
             salida = diccionario["name"]
             for tags in diccionario:
                 if diccionario[tags] and tags != "name":
-                    salida = "\t", tags, "=", diccionario[tags] + "", "\n"
+                    salida = "\t" + tags + "=" + diccionario[tags] + "" + "\n"
             return salida
 
     def do_local(self):
@@ -31,6 +32,8 @@ class KaraokeLocal():
                 os.system("wget -q " + recurso)
                 new = diccionario[tags].split('/')[-1]
                 diccionario[tags] = new
+	        salida2 = "\t", tags, "=", diccionario[tags] + "",
+        return salida2
 
 if __name__ == "__main__":
 
@@ -44,4 +47,3 @@ if __name__ == "__main__":
     print Karaoke
     Karaoke.do_local()
     print Karaoke
-
