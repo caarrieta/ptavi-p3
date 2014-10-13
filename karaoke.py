@@ -3,14 +3,8 @@
 
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
-from xml.sax.handler import smallsmilhandler
+import smallsmilhandler
 
-class Karaoke (smallmilhandler.SmalSMILHandler)
+class Karaoke():
 
-    def __init__(self, fich):
-        parser = make_parser()
-        parser = make_parser()
-        sHandler = shistesHandler()
-        parser.setContentHandler(sHandler)
-        parser.parse(open('fich'))      
-        self.lista = sHandler.get_tags()
+
